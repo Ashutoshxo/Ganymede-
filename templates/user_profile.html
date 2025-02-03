@@ -1,0 +1,224 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+<style>
+/* General Styles */
+body {
+    background-color: rgba(236, 245, 239, 0.95);
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    
+}
+
+h1, h2 {
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 2.5em;
+    color: #FFD700;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 6px rgba(255, 215, 0, 0.7);
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(-30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* User Info Card */
+.user-info {
+    width: 60%;
+    margin: 0 auto;
+    padding: 20px;
+    background: linear-gradient(135deg, #444, #333);
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #FFD700;
+}
+
+.user-info:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+}
+
+.user-info p {
+    font-size: 1.2em;
+    line-height: 1.5;
+    margin: 15px 0;
+}
+
+.user-info img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-top: 20px;
+    box-shadow: 0 8px 30px rgb(181, 144, 9);
+    transition: transform 1.5s , box-shadow 1s ;
+}
+
+.user-info img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 15px 50px rgba(129, 8, 72, 0.7);
+}
+
+/* Subscription List */
+.list-group-item {
+    background-color:rgb(0, 0, 0);
+   
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    box-shadow: 0 10px 20px rgba(224, 14, 14, 0.3);
+    font-size: 1.2em;
+    transition: background-color 0.3s ease;
+}
+
+.list-group-item:hover {
+    background-color: #444;
+}
+
+/* General Button Styles */
+.btn-common {
+    padding: 14px 32px;
+    background-color: #FFD700;
+    color: #121212;
+    font-size: 1.2em;
+    border-radius: 30px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
+    transition: background-color 0.3s, transform 0.3s ease;
+    cursor: pointer;
+    text-decoration: none; /* Ensure it's not underlined */
+    display: inline-block; /* Ensure it behaves like a button */
+}
+
+.btn-common:hover {
+    background-color: #FF5722;
+    color: #fff;
+    transform: scale(1.05);
+}
+
+/* Notification Section */
+.notification .alert {
+    background-color: #2a2a2a;
+    color: #FFD700;
+    border: 2px solid #FFD700;
+    font-size: 1.1em;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+/* Welcome Box */
+.welcome-box {
+    background-color: #1c1c1c;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
+    color: #f8f4f4;
+    font-size: 1.1em;
+    line-height: 1.7;
+    margin-top: 40px;
+    text-align: left;
+}
+
+.welcome-box strong {
+    color: #FFD700;
+}
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .user-info {
+        flex-direction: column; /* Stack the image and info for smaller screens */
+        align-items: center;
+    }
+
+    .user-info-text {
+        padding-left: 0; /* Remove padding on smaller screens */
+        text-align: center; /* Center the text */
+    }
+
+    .user-info .user-image img {
+        max-width: 120px; /* Smaller image size for mobile */
+    }
+
+    h3 {
+        font-size: 1.5rem; /* Smaller heading for mobile */
+    }
+
+    p {
+        font-size: 1rem; /* Smaller text for mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8rem; /* Smaller header for mobile */
+    }
+
+    .user-info-text {
+        font-size: 0.9rem; /* Slightly smaller text for mobile */
+    }
+}
+</style>
+
+<br>
+<h1 class="mb-4 text-center text-warning">User Profile</h1>
+
+<div class="user-info d-flex align-items-center">
+    <div class="user-image" style="flex: 1; ">
+        {% if profile_picture %}
+            <img src="{{ profile_picture.url }}" alt="Profile Picture" class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
+        {% else %}
+            <img src="https://i.pinimg.com/736x/31/0a/2f/310a2fc87f8ce6eda251a2f624bc6e66.jpg" alt="Default Profile Picture" class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
+        {% endif %}
+    </div>
+    
+    <div  style="flex: 2;">
+        <h3>Your Information</h3>
+        <p><strong>Name:</strong> {{ request.user.get_full_name|default:"N/A" }}</p>
+        <p><strong>Email:</strong> {{ request.user.email }}</p>
+        <p><strong>Bio:</strong> {{ bio|default:"No bio available" }}</p>
+    </div>
+</div>
+
+<div class="mt-4">
+    <a href="{% url 'profile_update' %}" class="btn-common">Edit Profile</a>
+    <a href="{% url 'user_dashboard' %}" class="btn-common">Check Your Dashboard</a>
+</div><br><br>
+
+<h2 class="mb-3">Your Subscriptions</h2>
+<div class="list-group mb-4">
+    {% for subscription in user_subscriptions %}
+        <div class="list-group-item text-light">
+            {{ subscription.plan.name }} - Expires on {{ subscription.end_date }}
+        </div>
+    {% empty %}
+        <div class="list-group-item text-light">No active subscriptions.</div>
+    {% endfor %}
+</div>
+
+<div class="subscribe-button-container">
+    <a href="{% url 'subscribe' %}" class="btn-common">View All Subscription Plans</a>
+</div>
+
+
+
+
+<div class="welcome-box">
+    <strong>Welcome to your user profile page!</strong><br>
+    Here, you can find all the essential information about your account, including your name and email address.<br>
+    Below, you'll see a list of your current subscriptions, making it easy to keep track of your active plans and their expiration dates.<br>
+    If you're looking to explore new subscription options, check out the available plans section, where you can find various options tailored to your needs.<br>
+    Simply click the <em>subscribe</em> button to get started.<br>
+    Enjoy a seamless and personalized experience!
+</div>
+
+{% endblock %}

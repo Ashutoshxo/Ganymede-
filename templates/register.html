@@ -1,0 +1,201 @@
+{% block body %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<h2 class="text-center mt-4 text-warning font-weight-bold">Who are you ?</h2>
+
+<div class="container">
+    <div class="text-center shadow-lg p-4 bg-black text-warning rounded">
+        <h2 class="font-weight-bold">Sign up </h2>
+        <p class="lead text-muted">Join us and explore the world of music!</p>
+    </div>
+
+    {% if form.errors %}
+        <div class="alert alert-danger mt-3">
+            Please correct the errors below.
+        </div>
+    {% endif %}
+
+ 
+    <div class="container w-75 shadow-lg mt-4 p-4 bg-dark rounded-lg border border-warning">
+        <form action="{% url 'register' %}" method="POST">
+            {% csrf_token %}
+            
+           
+            <div class="form-group">
+                {{ form.username.label_tag }}
+                <div class="input-group">
+                    {{ form.username }}
+                </div>
+                {% if form.username.errors %}
+                    <div class="text-danger mt-2">{{ form.username.errors }}</div>
+                {% endif %}
+            </div>
+
+            
+            <div class="form-group">
+                {{ form.first_name.label_tag }}
+                <div class="input-group">
+                    {{ form.first_name }}
+                </div>
+                {% if form.first_name.errors %}
+                    <div class="text-danger mt-2">{{ form.first_name.errors }}</div>
+                {% endif %}
+            </div>
+
+           
+            <div class="form-group">
+                {{ form.last_name.label_tag }}
+                <div class="input-group">
+                    {{ form.last_name }}
+                </div>
+                {% if form.last_name.errors %}
+                    <div class="text-danger mt-2">{{ form.last_name.errors }}</div>
+                {% endif %}
+            </div>
+
+           
+            <div class="form-group">
+                {{ form.email.label_tag }}
+                <div class="input-group">
+                    {{ form.email }}
+                </div>
+                {% if form.email.errors %}
+                    <div class="text-danger mt-2">{{ form.email.errors }}</div>
+                {% endif %}
+            </div>
+
+           
+            <div class="form-group">
+                {{ form.password1.label_tag }}
+                <div class="input-group">
+                    {{ form.password1 }}
+                </div>
+                {% if form.password1.errors %}
+                    <div class="text-danger mt-2">{{ form.password1.errors }}</div>
+                {% endif %}
+            </div>
+
+          
+            <div class="form-group">
+                {{ form.password2.label_tag }}
+                <div class="input-group">
+                    {{ form.password2 }}
+                </div>
+                {% if form.password2.errors %}
+                    <div class="text-danger mt-2">{{ form.password2.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-warning btn-lg px-5 py-2">Sign UP</button>
+            </div>
+
+            <div class="text-center mt-3">
+                <a href="{% url 'login' %}" class="btn btn-warning btn-lg px-5 py-2">Login</a>
+            </div>
+
+           
+        </form>
+        
+    </div>
+</div>
+
+<style>
+    
+    body {
+        background-color: #121212; /* Dark background for contrast */
+        color: #e0e0e0; /* Softer white text color */
+        font-family: 'Arial', sans-serif;
+    }
+
+    h2 {
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+    }
+
+    .container {
+        max-width: 1000px; /* Wider container */
+        margin-top: 40px;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-control {
+        background-color: #212529; /* Dark background for inputs */
+        color: white; /* White text */
+        border: 1px solid #FFD700; /* Golden border */
+        border-radius: 10px; /* Rounded corners */
+        padding: 0.75rem;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .form-control:focus {
+        border-color: #FFC107; /* Lighter gold border on focus */
+        box-shadow: 0 0 5px rgba(255, 193, 7, 0.75); /* Glow effect */
+    }
+
+    .form-control::placeholder {
+        color: #FFD700; /* Yellow placeholder text */
+    }
+
+ 
+    .btn-warning {
+        background-color: #FFD700; /* Yellow button background */
+        border: none;
+        font-weight: bold;
+        border-radius: 50px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn-warning:hover {
+        background-color: #FFC107; /* Darker yellow on hover */
+        transform: translateY(-2px); /* Lift effect */
+    }
+
+    .btn-warning:focus {
+        outline: none;
+        box-shadow: 0 0 5px #FFD700; /* Glow effect on button focus */
+    }
+
+   
+    .input-group {
+        margin-top: 10px;
+    }
+
+  
+    .text-danger {
+        font-size: 0.875rem;
+        margin-top: 5px;
+    }
+
+    
+    .bg-black {
+        background-color: black;
+    }
+
+    .bg-dark {
+        background-color: #343a40; /* Dark background for the form */
+    }
+
+    .shadow-lg {
+        box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .rounded {
+        border-radius: 10px; /* Soft rounded corners */
+    }
+
+    
+    .text-muted {
+        color: #b0b0b0;
+    }
+</style>
+
+{% endblock %}

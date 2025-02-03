@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+    body {
+        background-color: #121212; /* Darker background */
+        color: #e0e0e0; /* Softer text color */
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #FFD700; /* Gold color */
+    }
+
+    .genre-list {
+        margin: 0 auto;
+        max-width: 800px; /* Centering the content */
+    }
+
+    .genre {
+        background-color: #1a1a1a; /* Dark background for genres */
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+    }
+
+    .genre h2 {
+        color: #FFD700; /* Gold color for genre titles */
+        margin-bottom: 10px;
+    }
+
+    .song-list {
+        list-style: none; /* Remove default list styling */
+        padding-left: 0; /* Remove padding */
+    }
+
+    .song-list li {
+        padding: 10px;
+        background-color: #2a2a2a; /* Slightly lighter background for songs */
+        border-radius: 5px;
+        margin-bottom: 5px;
+        transition: background-color 0.3s; /* Smooth transition */
+    }
+
+    .song-list li:hover {
+        background-color: #FFD700; /* Highlight on hover */
+        color: black; /* Change text color on hover */
+    }
+
+    .no-songs {
+        color: #ccc; /* Grey color for no songs message */
+        text-align: center; /* Center the no songs message */
+    }
+</style>
+
+
+
+<h1>Library</h1>
+
+<div class="genre-list">
+    {% for genre in genres %}
+        <div class="genre">
+            <h2>{{ genre.name }}</h2>
+            <ul class="song-list">
+                {% for song in genre.song_set.all %}
+                    <li>{{ song.title }} by {{ song.artist.name }}</li>
+                {% empty %}
+                    <li class="no-songs">No songs available for this genre.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

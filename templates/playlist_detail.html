@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="text-center">
+       
+        {% if playlist.cover_image %}
+            <img src="{{ playlist.cover_image.url }}" alt="{{ playlist.name }} Cover" class="img-fluid mb-4" style="max-height: 300px; object-fit: cover;">
+        {% else %}
+            <p>No cover image available.</p>
+        {% endif %}
+        
+        <h1 class="display-3 text-primary mb-4">{{ playlist.name }}</h1>
+        <p class="color-change">A hand-picked selection of your favorite tunes.</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+            <h2 class="text-warning mb-4">Songs</h2>
+            <ul class="list-group list-group-flush">
+                {% for song in playlist.songs.all %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center bg-dark text-light rounded-lg mb-3">
+                        <a href="{% url 'song_detail' song.id %}?song_url={{ song.music_file.url }}" class="text-warning text-decoration-none hover-link">
+                            <strong>{{ song.title }}</strong> by <em>{{ song.artist.name }}</em>
+                        </a>
+                        <span>
+                            <i class="bi bi-music-note-beamed"></i>
+                        </span>
+                    </li>
+                {% empty %}
+                    <li class="list-group-item bg-dark text-light text-center">
+                        <strong>No songs in this playlist.</strong>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
+
+{% block extra_styles %}
+    <style>
+       
+
+        .color-change {
+            animation: colorChange 5s infinite;
+            font-weight: 1000;
+        }
+
+       
+        .hover-link:hover {
+            color: #ffd700; /* Golden color on hover */
+            text-decoration: underline;
+            transition: color 0.3s ease, transform 0.2s ease-in-out;
+            transform: scale(1.05);
+        }
+
+        /* Styling for song list items */
+        .list-group-item {
+            background-color: #333;
+            border: none;
+        }
+
+        .list-group-item:hover {
+            background-color: #444;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .bi {
+            font-size: 1.5rem;
+            color: #ffd700;
+        }
+
+        .container {
+            max-width: 1200px;
+        }
+    </style>
+    
+{% endblock %}

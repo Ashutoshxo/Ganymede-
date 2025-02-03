@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="container mt-5">
+   
+   
+    
+
+  
+    <div class="text-center mb-4">
+        <h1 class="display-4 text-warning text-shadow">{{ album.title }}<a href="{% url 'artist_detail' artist.id %}"> </h1>
+        <p class="lead text-muted">By <strong>{{ album.artist.name }}</strong></p> </a>
+        <p class="text-muted">Released: {{ album.release_date }}</p>
+    </div>
+
+ 
+    <div class="text-center mb-4">
+        {% if album.cover_image %}
+            <img src="{{ album.cover_image.url }}" alt="{{ album.title }} cover" class="img-fluid rounded-lg shadow-lg hover-shadow" style="max-width: 100%; max-height: 300px;">
+        {% else %}
+            <p class="text-muted">No cover image available</p>
+        {% endif %}
+    </div>
+
+    
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-3">
+            <h3 class="text-warning mb-4 text-center">Tracks</h3>
+            <ul class="list-unstyled">
+                {% for track in album.songs.all %}
+                    <li class="mb-2">
+                        <a href="{% url 'song_detail' id=track.id %}" class="text-warning hover-link">
+                            <i class="bi bi-play-circle"></i> {{ track.title }}
+                        </a>
+                    </li>
+                {% empty %}
+                    <li class="text-muted text-center">No tracks available for this album.</li>
+                {% endfor %}
+                <a href="{% url 'artist_detail' artist.id %}">
+                    <img src="{{ artist.image.url }}" alt="{{ artist.name }}" class="artist-image" style="width: 20px; height: 20px;"/>
+                    <strong class="artist-name">{{ artist.name }}</strong>
+                </a>
+            </ul>
+        </div>
+    </div>
+
+   
+  
+    <div class="text-center mt-4">
+        <a href="{% url 'home' %}" class="btn btn-warning btn-lg shadow-lg hover-shadow">Back to Home</a>
+    </div>
+</div>
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+
+
+
+
+<style>
+  
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #121212; /* Darker background for contrast */
+        color: #e0e0e0; /* Softer white for readability */
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Title Styling */
+    .text-shadow {
+        text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
+    }
+
+    h1 {
+        font-weight: bold;
+        letter-spacing: 1px;
+        color: #ff6347; /* Tomato color for album title */
+    }
+
+    .lead {
+        font-weight: 400;
+    }
+
+    /* Album Cover Image Styling */
+    img {
+        max-width: 100%;
+        max-height: 300px;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth effect on hover */
+    }
+
+    img:hover {
+        transform: scale(1.05); /* Slightly enlarge on hover */
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3); /* Stronger shadow */
+    }
+
+    /* Track List Styles */
+    .hover-link {
+        color: #ffd700; /* Gold color for song titles */
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.3s ease, transform 0.2s ease-in-out;
+    }
+
+    .hover-link:hover {
+        color: #ff6347; /* Tomato color on hover */
+        transform: scale(1.05);
+        text-decoration: underline;
+    }
+
+    .bi-play-circle {
+        font-size: 1.2rem;
+        color: #ffd700;
+        margin-right: 10px;
+        transition: color 0.2s ease;
+    }
+
+    .bi-play-circle:hover {
+        color: #ff6347;
+    }
+
+    /* Button Styling */
+    .btn-warning {
+        background-color: #ff6347; /* Tomato color */
+        border-color: #ff6347;
+        padding: 15px 30px;
+        font-size: 18px;
+        text-transform: uppercase;
+    }
+
+    .btn-warning:hover {
+        background-color: #ff4500; /* Darker red on hover */
+        border-color: #ff4500;
+    }
+
+    /* Hover Shadow Effect */
+    .hover-shadow:hover {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    /* General Layout */
+    .container {
+        max-width: 1200px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 767px) {
+        .text-center {
+            text-align: center;
+        }
+
+        .container {
+            padding: 10px;
+        }
+
+        img {
+            max-width: 90%; /* Make image smaller on mobile */
+        }
+    }
+</style>
+
+{% endblock %}

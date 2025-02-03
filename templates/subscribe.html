@@ -1,0 +1,23 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+<h2>Pay for Your Subscription</h2>
+
+<form action="{% url 'paypal_payment' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="plan_id" value="{{ plan.id }}">
+    <input type="hidden" name="amount" value="{{ plan.price }}">
+    <input type="hidden" name="duration" value="{{ plan.duration }}">
+    <button type="submit" class="btn btn-primary">Proceed to PayPal</button>
+    
+</form>
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="message">{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+

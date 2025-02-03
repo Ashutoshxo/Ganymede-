@@ -1,0 +1,122 @@
+{% load static %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+<nav class="navbar navbar-expand-lg" style="background-color: #121212; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'home' %}" style="color: #FFD700; font-family: 'Montserrat', sans-serif; font-size: 1.8em;">
+            <img src="{% static 'image/moon.png' %}" alt="Logo" style="width: 40px; height: 40px; margin-right: 10px;">
+            Ganymede
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon" style="background-color: #FFD700;"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="mx-auto d-flex align-items-center">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'home' %}" style="color: #FFD700; font-family: 'Roboto', sans-serif; font-size: 1.2em;">
+                            <i class="fas fa-home" style="font-size: 1.5em;"></i>
+                        </a>
+                    </li>
+{% comment %}                     
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #FFD700; font-family: 'Roboto', sans-serif; font-size: 1.2em;">
+                            Library
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #121212;">
+                            <a class="nav-link" href="{% url 'library' %}" style="color: #FFD700;">Library</a>
+                            <a class="nav-link" href="{% url 'album_list' %}" style="color: #FFD700; ">Album List</a>
+
+                        </ul>
+                        
+                    </li> {% endcomment %}
+                    
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'user_profile' %}" style="color: #FFD700; font-family: 'Roboto', sans-serif; font-size: 1.2em;">
+                            {% if user.profile_picture %}
+                                <img src="{{ user.profile_picture.url }}" alt="Profile Image" class="rounded-circle" style="width: 30px; height: 30px; margin-right: 8px; object-fit: cover;">
+                            {% else %}
+                                <img src="https://i.pinimg.com/736x/31/0a/2f/310a2fc87f8ce6eda251a2f624bc6e66.jpg" alt="Default Profile Image" class="rounded-circle" style="width: 30px; height: 30px; margin-right: 8px; object-fit: cover;">
+                            {% endif %}
+                            {{ user.username|upper }} 
+                        </a>
+                    </li>
+                    
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}" style="color: #FFD700; font-family: 'Roboto', sans-serif; font-size: 1.2em;">Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}" style="color: #FFD700; font-family: 'Roboto', sans-serif; font-size: 1.2em;">Login</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+            
+ 
+
+
+            <form class="d-flex" role="search" method="GET" action="{% url 'search' %}">
+                <input class="form-control me-2" type="search" name="q" placeholder=" Artists-song" aria-label="Search" style="background-color: #e7e2e2; color: #FFD700; border: 1px solid #FFD700; font-family: 'Outfit', sans-serif;">
+                <button class="btn btn-outline-warning" type="submit" style="font-family: 'Roboto', sans-serif; font-size: 1.1em;">Search</button>
+            </form>
+        </div>
+    </div>
+</nav> 
+<style>
+    body {
+        margin: 0;
+        font-family: "Outfit", serif;
+        background-color: black; 
+        color: #e0e0e0; 
+        
+    }
+
+   
+    nav {
+        
+       
+        padding: 15px;
+        position: sticky;
+        top: 0;
+        width: 100%;
+        z-index: 1000; /* Ensure it stays on top */
+       
+        
+    }
+
+    nav a {
+        
+        text-decoration: none;
+        margin: 0 15px;
+        font-family: 'Roboto', sans-serif;
+      
+        transition: transform 1.2s ; 
+    }
+
+    nav a:hover {
+      
+        transform: scale(1.2); 
+      
+    }
+
+
+    .btn-outline-warning {
+      
+        font-family: "Outfit", serif;
+        transition: background-color 0.3s ease, color 1.3s ease;
+    }
+
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        nav a {
+            font-size: 1.1em; 
+        }
+
+        .navbar-brand {
+            font-size: 1.6em; 
+        }
+    }
+</style>

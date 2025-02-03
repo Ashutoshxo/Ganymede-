@@ -1,0 +1,159 @@
+{% block body %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<h2 class="text-center mt-4 text-warning font-weight-bold">Login</h2>
+
+<div class="container">
+    <div class="text-center shadow-lg p-4 bg-black text-warning rounded">
+        <h2 class="font-weight-bold">Login Form</h2>
+        <p class="lead text-muted">Welcome back! Please log in.</p>
+    </div>
+
+    <div class="container w-75 shadow-lg mt-4 p-4 bg-dark rounded-lg border border-warning">
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="alert alert-danger" role="alert" style="display: {% if form.non_field_errors %}block{% else %}none{% endif %};">
+                {{ form.non_field_errors }}
+            </div>
+
+            <div class="form-group">
+                <label for="username" class="text-warning">Username</label>
+                <div class="input-group">
+                    {{ form.username }}
+                </div>
+                {% if form.username.errors %}
+                    <div class="text-danger mt-2">{{ form.username.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="text-warning">Password</label>
+                <div class="input-group">
+                    {{ form.password }}
+                </div>
+                {% if form.password.errors %}
+                    <div class="text-danger mt-2">{{ form.password.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-warning btn-lg px-5 py-2">Login</button>
+            </div>
+
+            <!-- Sign Up Button styled similarly -->
+            <div class="text-center mt-3">
+                <a href="{% url 'register' %}" class="btn btn-warning btn-lg px-5 py-2">Sign Up</a>
+            </div>
+<br><br>
+            <p>Ain't remember password? <a href="{% url 'forgotpassword' %}">Click here</a> to reset it.</p>
+
+        </form>
+    </div>
+</div>
+
+<style>
+    /* Global Styles */
+    body {
+        background-color: #121212; /* Dark background for contrast */
+        color: #e0e0e0; /* Softer white text color */
+        font-family: 'Arial', sans-serif;
+    }
+
+    h2 {
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+    }
+
+    /* Container Styles */
+    .container {
+        max-width: 1000px; /* Wider container */
+        margin-top: 40px;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    /* Form Styling */
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-control {
+        background-color: #212529; /* Dark background for inputs */
+        color: white; /* White text */
+        border: 1px solid #FFD700; /* Golden border */
+        border-radius: 10px; /* Rounded corners */
+        padding: 0.75rem;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .form-control:focus {
+        border-color: #FFC107; /* Lighter gold border on focus */
+        box-shadow: 0 0 5px rgba(255, 193, 7, 0.75); /* Glow effect */
+    }
+
+    .form-control::placeholder {
+        color: #FFD700; /* Yellow placeholder text */
+    }
+
+    /* Button Styling */
+    .btn-warning {
+        background-color: #FFD700; /* Yellow button background */
+        border: none;
+        font-weight: bold;
+        border-radius: 50px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn-warning:hover {
+        background-color: #FFC107; /* Darker yellow on hover */
+        transform: translateY(-2px); /* Lift effect */
+    }
+
+    .btn-warning:focus {
+        outline: none;
+        box-shadow: 0 0 5px #FFD700; /* Glow effect on button focus */
+    }
+
+    /* Input Group Styles */
+    .input-group {
+        margin-top: 10px;
+    }
+
+    /* Error Styling */
+    .text-danger {
+        font-size: 0.875rem;
+        margin-top: 5px;
+    }
+
+    /* Header Styles */
+    .bg-black {
+        background-color: black;
+    }
+
+    .bg-dark {
+        background-color: #343a40; /* Dark background for the form */
+    }
+
+    .shadow-lg {
+        box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .rounded {
+        border-radius: 10px; /* Soft rounded corners */
+    }
+
+    /* Small Text */
+    .text-muted {
+        color: #b0b0b0;
+    }
+
+    /* Alert Styling */
+    .alert-danger {
+        font-size: 0.875rem;
+    }
+</style>
+
+{% endblock %}

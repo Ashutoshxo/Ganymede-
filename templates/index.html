@@ -1,0 +1,175 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+{% block body %}
+
+<a href="{% url 'home' %}" style="color: #D4B28C; font-family: 'Montserrat', sans-serif; font-size: 1.8em; text-transform: uppercase; letter-spacing: 2px;">
+    <img src="{% static 'image/moon.png' %}" alt="Logo" style="width: 40px; height: 40px; margin-right: 10px;">
+    Ganymede
+</a>
+
+<!-- User Profile or Login Link -->
+<a href="{% if user.is_authenticated %}{% url 'user_profile' %}{% else %}{% url 'login' %}{% endif %}" 
+   style="font-family: 'Roboto', sans-serif; font-size: 1.5em; height: auto; color: #A68C64;">
+    {% if user.is_authenticated %}
+        {% if user.profile_picture %}
+            <img src="{{ user.profile_picture.url }}" alt="Profile Image" class="rounded-circle" 
+                 style="width: 30px; height: 30px; margin-right: 8px; object-fit: cover;">
+        {% else %}
+            <img src="https://i.pinimg.com/736x/31/0a/2f/310a2fc87f8ce6eda251a2f624bc6e66.jpg" alt="Default Profile Image" 
+                 class="rounded-circle" style="width: 30px; height: 30px; margin-right: 8px; object-fit: cover;">
+        {% endif %}
+        {{ user.username|upper }}
+    {% else %}
+        Who are you?
+    {% endif %}
+</a>
+
+<!-- Hero Section with Desert-Inspired Background and Text -->
+<div style="background-image: url('https://wallpapercave.com/wp/wp10446532.jpg'); background-color: rgba(0, 0, 0, 0.7); color: #FAF1D1; text-align: center; padding: 80px 40px; position: relative;">
+    <h1 style="font-size: 5em; font-family: 'Montserrat', sans-serif; text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8); letter-spacing: 5px; color: #A68C64; background-color: rgba(0, 0, 0, 0.5); padding: 10px;">
+        Welcome to Ganymede
+    </h1>
+    <h5 style="font-size: 3em; font-family: 'Dancing Script', serif; text-shadow: 10px 10px 10px rgba(16, 244, 107, 0.7); color: #e9e9e9; background-color: black; padding: 10px;">
+        “Music, in even the most terrible situations, must never offend the ear but always remain a source of pleasure.” — Mozart
+    </h5>
+    <p style="font-size: 1.3em; margin: 20px 0; font-family: 'Roboto', sans-serif; background-color: black; padding: 10px; color: #e9e9e9;">
+        Your go-to site for streaming and enjoying your favorite music tracks. Discover new artists and create playlists that suit your mood.
+    </p>
+    <div style="display: flex; justify-content: center; margin-top: 30px;">
+        <a href="{% url 'register' %}" style="padding: 14px 28px; font-size: 1.1em; background-color: #FF6F61; color: white; text-decoration: none; border-radius: 30px; margin: 0 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); transition: transform 0.3s ease;">Sign Up</a>
+        <a href="{% url 'login' %}" style="padding: 14px 28px; font-size: 1.1em; background-color: #D4B28C; color: black; text-decoration: none; border-radius: 30px; margin: 0 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); transition: transform 0.3s ease;">Log In</a>
+    </div>
+</div>
+
+<!-- Feature Section with Desert-Inspired Colors -->
+<div style="background: linear-gradient(135deg, #c7a67d 0%, #a68c64 100%); color: white; padding: 100px 20px; text-align: center; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);">
+    <h2 style="font-size: 3.8em; font-family: 'Montserrat', sans-serif; font-weight: 700; text-transform: uppercase; color: #FFD700; letter-spacing: 3px; margin-bottom: 60px;">Our Features</h2>
+
+    <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 40px; margin-top: 40px;">
+        <div style="flex: 1 1 250px; max-width: 300px; padding: 40px; background-color: rgba(0, 0, 0, 0.7); border-radius: 20px;">
+            <h3 style="font-size: 2.2em; font-family: 'Roboto', sans-serif; color: #FFD700; margin-bottom: 20px; text-transform: uppercase; font-weight: bold; letter-spacing: 2px;">Stream Your Favorites</h3>
+            <p style="font-size: 1.2em; color: #FFFAF0; line-height: 1.6;">Access millions of songs across various genres anytime, anywhere. Whether at home or on the go, your music is always with you.</p>
+        </div>
+
+        <div style="flex: 1 1 250px; max-width: 300px; padding: 40px; background-color: rgba(0, 0, 0, 0.7); border-radius: 20px;">
+            <h3 style="font-size: 2.2em; font-family: 'Roboto', sans-serif; color: #FFD700; margin-bottom: 20px; text-transform: uppercase; font-weight: bold; letter-spacing: 2px;">Get Playlists</h3>
+            <p style="font-size: 1.2em; color: #FFFAF0; line-height: 1.6;">Curate your personal playlists and share them with friends or the world. Customize your listening experience like never before.</p>
+        </div>
+
+        <div style="flex: 1 1 250px; max-width: 300px; padding: 40px; background-color: rgba(0, 0, 0, 0.7); border-radius: 20px;">
+            <h3 style="font-size: 2.2em; font-family: 'Roboto', sans-serif; color: #FFD700; margin-bottom: 20px; text-transform: uppercase; font-weight: bold; letter-spacing: 2px;">Discover New Music</h3>
+            <p style="font-size: 1.2em; color: #FFFAF0; line-height: 1.6;">Let our platform suggest new tracks based on your preferences. Explore new artists, genres, and songs tailored to you.</p>
+        </div>
+    </div>
+</div>
+<img src="{% static 'image/1.jpg' %}" alt="Music Player" class="hero-image" style="max-width: 100%; height: auto; border-radius: 15px; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5); margin: 20px 0; transition: transform 0.5s ease-in-out;">
+
+
+<h2 style="margin-top: 60px; font-size: 2.5em; font-family: 'Montserrat', sans-serif; text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.7); color: #FF6F61;">Get Started</h2>
+<p style="font-size: 1.3em; font-family: 'Roboto', sans-serif; text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6); margin: 20px 0;">Ready to dive into the world of music? Click below to explore!</p>
+<a href="{% url 'register' %}" style="padding: 14px 28px; font-size: 1.1em; background-color: #FF6F61; color: white; text-decoration: none; border-radius: 30px; margin: 0 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); transition: transform 0.3s ease;">Sign Up</a>
+<a href="{% url 'login' %}" style="padding: 14px 28px; font-size: 1.1em; background-color: #FFD700; color: black; text-decoration: none; border-radius: 30px; margin: 0 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); transition: transform 0.3s ease;">Log In</a>
+
+<div style="background-image: url('{% static 'image/music wallpaper.jpeg' %}'); background-size: cover; background-position: center; min-height: 400px; color: white; display: flex; justify-content: center; align-items: center; text-align: center; margin-top: 60px;">
+    <h2 style="font-size: 2.8em; font-family: 'Montserrat', sans-serif; text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.7); color: #FF6F61;">Feel the Beat with Our Music</h2>
+    <h6 style="font-size: 1.8em; font-family: 'Dancing Script', serif; max-width: 800px; margin: 20px auto; text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5); color: #FFFAF0; font-weight: bold;">Let the music immerse you while you explore the platform. Feel the rhythm, dive into the vibes, and get ready for a musical journey.</h6>
+</div>
+
+
+
+
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #121212; /* Darker background for better contrast */
+        color: #e0e0e0;
+        overflow-x: hidden;
+        text-align: center;
+    }
+
+    h1, h2, h5 {
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    h1 {
+        font-size: 3.5em;
+        color: #FF6F61;
+    }
+
+    h2, h5 {
+        font-size: 2.2em;
+        color: #FFD700;
+    }
+
+    p {
+        font-size: 1.2em;
+        line-height: 1.8;
+        color: #e0e0e0;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 12px 15px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        margin: 20px 0;
+        transition: background-color 0.3s, box-shadow 0.3s;
+    }
+
+    p:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 6px 15px rgba(255, 0, 0, 0.5);
+    }
+
+    .hero-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 20px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .hero-image:hover {
+        transform: scale(1.05);
+    }
+
+    a {
+        display: inline-block;
+        padding: 15px 28px;
+        
+        color: white;
+        text-decoration:tomato;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        font-weight: bold;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+    a:hover {
+    background-color: #eadfdf;     
+    transform: scale(1.55);         
+    color: #f80858;                
+    border-radius: 100px;            
+    box-shadow: 0 14px 8px rgba(210, 12, 25, 0.968); 
+    transition: all 3s ;              
+    font-weight: bold;              
+}
+
+    ul li {
+        margin: 20px 0;
+        font-size: 1.3em;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 12px 18px;
+        border-radius: 12px;
+        transition: background-color 0.3s ease;
+    }
+
+    ul li:hover {
+        background: rgba(255, 255, 255, 0.3);
+    }
+
+ 
+
+</style>
+
+{% endblock %}

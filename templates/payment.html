@@ -1,0 +1,241 @@
+
+{% block body %}
+<head>
+    <style>
+        /* Import the Dancing Script font from Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+    </style>
+</head>
+
+<section class="invoice-container">
+    <h2 class="section-title">Subscription Invoice</h2>
+
+
+  
+    <div class="invoice-details">
+        <h3 class="invoice-heading">Invoice for Subscription to <strong>{{ plan.name }}</strong> Plan</h3>
+        
+        <div class="user-details">
+            <p><strong>User Name:</strong> {% if user.first_name and user.last_name %}
+                {{ user.first_name }} {{ user.last_name }}
+            {% else %}
+                {{ user.username }}
+            {% endif %}</p>
+
+            <p><strong>Email:</strong> {% if user.email %}{{ user.email }}{% else %}Not available{% endif %}</p>
+            
+        </div>
+
+        <div class="subscription-details">
+            <p><strong>Plan:</strong> {{ plan.name }}</p>
+            <p><strong>Price:</strong> ${{ plan.price }} for {{ plan.duration }} days</p>
+            <p><strong>Subscription Start Date:</strong> {{ subscription_start_date }}</p>
+            <p><strong>Subscription End Date:</strong> {{ subscription_end_date }}</p>
+        </div>
+
+        <div class="total-amount">
+            <p><strong>Total Amount Due:</strong> ${{ plan.price }}</p>
+        </div>
+    </div>
+
+   
+    <div class="payment-area">
+        <h2>Proceed to Payment</h2>
+      
+           
+            {{ paypal.render }} 
+
+            
+           
+</section>
+
+
+
+
+<style>
+    
+    .section-title {
+        font-family: 'Dancing Script', cursive; /* Apply Dancing Script font */
+        font-size: 2.8rem;
+        font-weight: bold;
+        color: #d4af37; /* Gold color for a luxurious look */
+        margin-bottom: 30px;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+    }
+
+
+
+
+    *
+    body {
+        background: linear-gradient(to right, #000000, #434343); /* Dark gradient for an elegant feel */
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #fff; /* White text on dark background */
+    }
+    
+    /* Centering content */
+    .invoice-container {
+        max-width: 900px;
+        margin: 50px auto;
+        padding: 40px;
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+        color: #333;
+        text-align: left;
+        transition: all 0.3s ease-in-out;
+        transform: scale(1);
+    }
+    
+    /* Hover effect for the invoice container */
+    .invoice-container:hover {
+        transform: scale(1.05);
+    }
+    
+    /* Title for the invoice section */
+    .section-title {
+        font-size: 2.8rem;
+        font-weight: bold;
+        color: #d4af37; /* Gold color for a luxurious look */
+        margin-bottom: 30px;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+    }
+    
+    /* Invoice Heading */
+    .invoice-heading {
+        font-size: 1.9rem;
+        font-weight: 600;
+        color: #d4af37;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    
+    /* Message container style */
+    .message-container {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    
+    .messages {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .message {
+        padding: 15px;
+        margin: 10px 0;
+        background-color: #d4af37; /* Gold background for message */
+        color: #fff;
+        border-radius: 8px;
+        font-size: 1.2rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* User and Subscription Details Section */
+    .invoice-details {
+        margin-bottom: 30px;
+    }
+    
+    .user-details p,
+    .subscription-details p {
+        font-size: 1.2rem;
+        line-height: 1.7;
+        margin: 10px 0;
+    }
+    
+    .user-details p strong,
+    .subscription-details p strong {
+        color: #d4af37; /* Gold for important details */
+    }
+    
+    /* Total Amount Styling */
+    .total-amount {
+        font-size: 1.6rem;
+        font-weight: bold;
+        color: #333;
+        margin-top: 20px;
+        padding-top: 10px;
+        border-top: 2px solid #d4af37; /* Gold border */
+    }
+    
+    /* Payment Section Styling */
+    .payment-area {
+        padding: 25px;
+        background-color: #000; /* Black background for the payment section */
+        border-radius: 12px;
+        text-align: center;
+        color: white;
+        margin-top: 30px;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+    }
+    
+    .payment-area h2 {
+        font-size: 1.7rem;
+        font-weight: 500;
+        letter-spacing: 1px;
+        margin-bottom: 25px;
+        color: #d4af37; /* Gold for text */
+    }
+    
+    /* PayPal Button Style */
+    .paypal-form input[type="submit"] {
+        padding: 20px 45px;
+        background-color: #d4af37; /* Gold background */
+        color: #000; /* Black text for contrast */
+        font-size: 1.3rem;
+        font-weight: bold;
+        border: 2px solid #d4af37;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        text-transform: uppercase;
+    }
+    
+    /* Hover effect for the PayPal button */
+    .paypal-form input[type="submit"]:hover {
+        background-color: #000; /* Black background on hover */
+        color: #d4af37; /* Gold text on hover */
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Responsive design for mobile and tablets */
+    @media (max-width: 768px) {
+        .invoice-container {
+            padding: 25px;
+            width: 90%;
+        }
+    
+        .section-title {
+            font-size: 2.2rem;
+        }
+    
+        .invoice-heading {
+            font-size: 1.6rem;
+        }
+    
+        .total-amount {
+            font-size: 1.4rem;
+        }
+    
+        .payment-area h2 {
+            font-size: 1.4rem;
+        }
+    
+        .paypal-form input[type="submit"] {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+        }
+    }
+    
+    
+</style>
+{% endblock %}

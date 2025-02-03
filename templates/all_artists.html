@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<div class="container mt-5">
+   
+    <h1 class="display-4 text-center mb-4 text-warning text-shadow">Artists</h1>
+    
+    <div class="row">
+        {% for artist in artists %}
+        <div class="col-md-4 mb-4">
+            <div class="card text-center shadow-lg transform-card">
+                {% if artist.image %}
+                    <a href="{% url 'artist_detail' artist.id %}">
+                        <img src="{{ artist.image.url }}" alt="{{ artist.name }}" class="card-img-top artist-image hover-shadow">
+                    </a>
+                {% endif %}
+                <div class="card-body bg-dark text-white">
+                    <h5  style="color:  #ffd700;;" ;>{{ artist.name }}</h5>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+    <div class="text-center mt-4">
+        <a href="{% url 'home' %}" class="btn btn-warning btn-lg shadow-lg hover-shadow">Return HOME</a>
+    </div>
+</div>
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<style>
+    /* Body Styles */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #121212; /* Dark background for contrast */
+        color: #e0e0e0; /* Softer white for readability */
+       
+        padding: 10px;
+    }
+
+    .text-shadow {
+        text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7); /* Soft text-shadow for a glowing effect */
+    }
+
+    h1 {
+        font-weight: bold;
+        letter-spacing: 20px;
+        
+    }
+
+    
+    .artist-image {
+        width: 300px;
+
+        object-fit: cover; 
+        
+        max-height: 300px; 
+        
+    }
+
+    .artist-image:hover {
+        transform: scale(1.5); 
+    
+        height: auto;
+    }
+
+    .card {
+     
+        transition: transform 2s, box-shadow 3s ease-in-out; 
+        border-radius: 15px;
+    }
+
+    .card:hover {
+        transform: scale(1.05); 
+        
+    }
+
+  
+    .card-body {
+     
+        border-radius: 0 0 15px 15px; /* Rounded bottom corners */
+    }
+
+    .card-title {
+        font-weight: bold;
+     
+    }
+
+    /* Hover Shadow for Interactive Elements */
+    .hover-shadow:hover {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+    }
+
+    /* Button Styling */
+    .btn-warning {
+        background-color: #ff6347; /* Tomato color */
+        border-color: #ff6347;
+        padding: 15px 30px;
+        font-size: 18px;
+        text-transform: uppercase;
+    }
+
+    .btn-warning:hover {
+        background-color: #ff4500; /* Darker red when hovered */
+        border-color: #ff4500;
+    }
+
+    /* General Layout */
+    .container {
+        max-width: 1200px;
+    }
+
+    /* Responsive Layout */
+    @media (max-width: 767px) {
+        .container {
+            padding: 10px; /* Add some padding for smaller screens */
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .artist-image {
+            height: 250px; /* Slightly smaller image for mobile */
+        }
+
+        h1 {
+            font-size: 1.8rem; /* Adjust the size of the title on small screens */
+        }
+    }
+</style>
+
+{% endblock %}

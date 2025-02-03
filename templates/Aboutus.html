@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="about-us">
+        <header class="about-us-header">
+            <h1>Welcome to <span class="highlight">Ganymede</span></h1>
+            <p>Your Ultimate Music Experience</p>
+        </header>
+
+        <section class="about-us-section">
+            <h2>Our Mission</h2>
+            <p>At <strong>Ganymede</strong>, we're passionate about connecting you with the music you love. Whether you're a casual listener, a die-hard music fan, or an artist looking to showcase your talent, Ganymede is the platform where you can discover, enjoy, and share music in an entirely new way.</p>
+            <p>Our mission is simple: To bring the world’s music together and make it accessible to everyone, everywhere. We aim to revolutionize the way people experience music by creating a seamless and interactive platform that not only lets you listen but allows you to dive deeper into the music you love.</p>
+        </section>
+
+        <section class="about-us-section">
+            <h2>What We Offer</h2>
+            <ul class="offer-list">
+                <li><strong>Endless Music Library</strong>: With millions of songs, albums, and artists at your fingertips, you’ll never run out of music to explore. Whether you’re into pop, rock, hip-hop, jazz, or any other genre, we’ve got you covered.</li>
+                <li><strong>Artist Spotlight</strong>: Discover new and emerging artists who are taking the music world by storm. <strong>Ganymede</strong> provides a platform for talented musicians to share their work with a global audience.</li>
+                <li><strong>Personalized Recommendations</strong>: Based on your listening habits, we provide tailored recommendations that suit your musical taste. Find your next favorite track, album, or artist with ease.</li>
+                <li><strong>Curated Playlists</strong>: Whether you're in the mood for a chill evening, a workout session, or a road trip, our curated playlists cater to every mood and moment. Let us do the hard work, so you can focus on enjoying the music.</li>
+                <li><strong>Exclusive Features</strong>: With <strong>Ganymede</strong>, you can create your own playlists, share music with friends, and even interact with your favorite artists and fellow music lovers.</li>
+                <li><strong>Subscription Plans</strong>: Enjoy all the premium features of <strong>Ganymede</strong> with flexible subscription options. We have something for everyone, whether you prefer a monthly, yearly, or trial plan.</li>
+            </ul>
+        </section>
+
+        <section class="about-us-section">
+            <h2>Our Vision</h2>
+            <p>We envision a world where music is not just something you listen to but something you experience in every aspect of your life. At <strong>Ganymede</strong>, we want to foster a deeper connection between artists and their fans while making music more interactive, accessible, and fun.</p>
+            <p>We aim to create a community where music lovers of all kinds can come together, share their passion, and discover new artists, genres, and sounds that they might not have found otherwise. We believe in the power of music to inspire, unite, and elevate every moment.</p>
+        </section>
+
+        <section class="about-us-section">
+            <h2>Join Us</h2>
+            <p>Whether you're here to find the latest hits or dive deep into the hidden gems of the music world, <strong>Ganymede</strong> has something for everyone. Join us today and become part of the <strong>Ganymede</strong> community.</p>
+            <p>Thank you for choosing <strong>Ganymede</strong>. We look forward to sharing the soundtrack of your life with you.</p>
+        </section>
+
+       
+    </div>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 10px;
+        }
+        
+        h1, h2 {
+            color: #FFD700;
+            font-weight: bold;
+        }
+        
+        .about-us {
+            margin: 0 auto;
+            padding: 30px;
+            max-width: 1200px;
+        }
+        
+        .about-us-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .highlight {
+            color: #FF4081;
+        }
+        
+        .about-us-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .about-us-section h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .about-us-section p, .about-us-section li {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #d1d1d1;
+        }
+        
+        .offer-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .offer-list li {
+            margin-bottom: 20px;
+        }
+        
+        .footer {
+            background-color: #080707;
+            color: #FFD700;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .about-us {
+                padding: 20px;
+            }
+        
+            .about-us-section {
+                padding: 15px;
+            }
+        
+            .about-us-header h1 {
+                font-size: 32px;
+            }
+        
+            .footer {
+                padding: 15px;
+            }
+        }
+        </style>
+{% endblock %}

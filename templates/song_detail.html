@@ -1,0 +1,243 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<div class="container-fluid music-page">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-8 col-12 text-center">
+            
+            <h1 id="songTitle" class="text-hot animated-title">{{ song.title }}</h1>
+
+            <div class="song-image-container mb-4">
+                <img id="songImage" src="{{ song.image.url }}" alt="{{ song.title }}" class="img-fluid song-image">
+            </div>
+
+            <div style="background-color: rgba(253, 246, 246, 0.7); padding: 20px; box-shadow: 0 4px 10px rgba(234, 220, 220, 0.5);">
+                <div>
+                    <p>Artist
+                        <a href="{% url 'artist_detail' artist.id %}">
+                            <img src="{{ artist.image.url }}" alt="{{ artist.name }}" class="artist-image" style="width: 17px; height: 17px;"/>
+                            <strong class="artist-name">{{ artist.name }}</strong>
+                        </a>
+                    </p>
+                    
+                    <p id="songGenre" class="card-text text-light" style="color: #fff;">Genre <span class="text-primary">{{ song.genre.name }}</span></p>
+                    
+                    {% if song.album %}
+                        <p id="songAlbum" class="card-text text-light" style="color: #fff;">Album 
+                            <a href="{% url 'album_detail' song.album.id %}">
+                                <span class="text-primary">{{ song.album.title }}</span>
+                            </a>
+                        </p>
+                    {% else %}
+                        <p id="songAlbum" class="card-text text-light" style="color: #fff;">Album: <span class="text-primary">No album</span></p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="custom-audio-player mt-4">
+                <audio id="audio" class="audio-element" controls preload="auto">
+                    {% if song.music_file %}
+                        <source src="{{ song.music_file.url }}" type="audio/mpeg">
+                    {% else %}
+                        <p>Audio file not available.</p>
+                    {% endif %}
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+
+            <div class="playlist mt-4">
+                <h3>Queue</h3>
+                <ul id="playlist">
+                    {% for track in playlist %}
+                        <li data-id="{{ track.id }}">
+                            <a href="{% url 'song_detail' track.id %}">{{ track.title }} - {{ track.artist.name }}</a>
+                            <span class="song-duration">{{ track.duration }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="{% url 'home' %}" class="btn btn-hot btn-lg shadow">Return HOME</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.music-page {
+    background: linear-gradient(135deg, #1d1d1d, #0a0a0a);
+    padding: 50px 20px;
+    min-height: 100vh;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    animation: backgroundAnim 15s infinite linear;
+}
+
+@keyframes backgroundAnim {
+    0% { background: linear-gradient(135deg, #1d1d1d, #0a0a0a); }
+    25% { background: linear-gradient(135deg, #ff2a68, #ff004b); }
+    50% { background: linear-gradient(135deg, #ff5733, #000000); }
+    75% { background: linear-gradient(135deg, #ff4081, #6f1b4d); }
+    100% { background: linear-gradient(135deg, #1d1d1d,rgb(35, 35, 35)); }
+}
+
+.animated-title {
+    font-size: 2.5rem;
+    animation: fadeIn 1s ease-in-out, pulse 2s infinite ease;
+    color: rgba(182, 171, 171, 0.8);
+    text-shadow: 0px 0px 20px rgba(255, 64, 129, 0.7);
+}
+
+.song-image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    max-width: 350px;
+    margin: 0 auto;
+    box-shadow: 0 4px 10px rgba(255, 64, 129, 0.6);
+}
+
+.song-image {
+    width: 100%;
+    border-radius: 15px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.song-image:hover {
+    transform: scale(1.1);
+    box-shadow: 0 20px 30px rgba(255, 64, 129, 0.8);
+}
+
+.custom-audio-player {
+    background: rgba(182, 171, 171, 0.8);
+    padding: 15px;
+    border-radius: 15px;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    animation: breath 2s infinite ease-in-out;
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+.audio-element {
+    width: 100%;  /* Make audio controls fit the container */
+    background-color: transparent;
+    border: none;
+}
+
+.playlist {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    margin-top: 30px;
+}
+
+.playlist h3 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ff4081;
+    text-align: center;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.playlist ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.playlist ul li {
+    background: rgba(255, 64, 129, 0.1);
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+}
+
+.playlist ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.playlist ul li .song-duration {
+    color: #ff4081;
+    font-size: 0.9rem;
+}
+
+/* Scrollbar for the Playlist (if needed) */
+.playlist ul {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.playlist ul::-webkit-scrollbar {
+    width: 8px;
+}
+
+.playlist ul::-webkit-scrollbar-thumb {
+    background: rgba(255, 64, 129, 0.6);
+    border-radius: 10px;
+}
+
+.playlist ul::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+    .playlist {
+        padding: 15px;
+    }
+
+    .playlist h3 {
+        font-size: 1.5rem;
+    }
+
+    .playlist ul li {
+        padding: 10px;
+    }
+
+    .playlist ul li a {
+        font-size: 1rem;
+    }
+
+    .playlist ul li .song-duration {
+        font-size: 0.8rem;
+    }
+}
+
+/* Responsive adjustments for mobile and tablets */
+@media (max-width: 768px) {
+    .custom-audio-player {
+        padding: 15px;
+        text-align: center;
+    }
+
+    .audio-element {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .custom-audio-player {
+        padding: 10px;
+    }
+
+    .audio-element {
+        width: 100%;
+    }
+}
+</style>
+
+{% endblock %}

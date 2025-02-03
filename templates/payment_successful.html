@@ -1,0 +1,91 @@
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #4caf50;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        ul li {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            transition: background-color 0.3s;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+        }
+
+        .footer {
+            font-size: 0.9rem;
+            color: #777;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Payment Successful!</h1>
+        <p>Thank you for your payment. Your subscription is now active, and we're excited to have you on board!</p>
+        <p>Your subscription will be active until {{ subscription_end_date }}. You can manage your subscription  at any time from your profile.</p>
+
+        <h2>What You Get:</h2>
+        <ul>
+            <li>Access to all premium features for the duration of your subscription</li>
+            <li>Exclusive content updates and early access to new features</li>
+            <li>Ad-free browsing experience (if applicable)</li>
+        </ul>
+
+
+        <a href="{% url 'home' %}">Go to Home</a>
+
+        <div class="footer">
+            
+        </div>
+    </div>
+</body>

@@ -1,0 +1,245 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+
+<div class="container mt-5">
+    <div class="profile-card">
+        <h1 class="artist-name">{{ artist.name }}</h1>
+        
+        {% if artist.image %}
+            <img src="{{ artist.image.url }}" alt="{{ artist.name }}" class="artist-image mb-4 rounded-circle">
+        {% endif %}
+
+        
+      
+        <div class="latest-songs mt-5">
+            <h4 class="section-title">Latest Songs</h4>
+            <ul class="list-unstyled">
+                {% for song in artist.song_set.all|slice:":5" %}
+                    <li class="song-item">
+                        <a href="{% url 'song_detail' song.id %}" class="song-link">{{ song.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="albums mt-5">
+            <h4 class="section-title">Albums</h4>
+            <ul class="list-unstyled">
+                {% for album in artist.album_set.all|slice:":5" %}
+                    <li class="album-item">
+                        <a href="{% url 'album_detail' album.id %}" class="album-link">{{ album.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div class="biography-container">
+            <h5 style="color: #333;">Biography</h5>
+            
+            <p class="bio-text">{{ artist.biography }}</p>
+        </div>
+   
+        <div class="followers-count mt-4">
+            <strong>{{ follower_count }}</strong> 
+            {% if follower_count == 1 %}
+                Follower
+            {% else %}
+                Followers
+            {% endif %}
+        </div>
+
+       
+        <div class="text-center mt-4">
+            {% if is_following %}
+                <a href="{% url 'unfollow_artist' artist.id %}" class="btn unfollow-btn btn-lg">Unfollow</a>
+            {% else %}
+                <a href="{% url 'follow_artist' artist.id %}" class="btn follow-btn btn-lg">Follow</a>
+            {% endif %}
+        </div>
+
+
+       
+
+
+        <div class="text-center mt-4">
+            <a href="{% url 'home' %}" class="btn btn-warning btn-lg">Return HOME</a>
+        </div>
+    </div>
+</div>
+
+
+
+<style>
+    
+
+    .profile-card {
+        background-color: #f9f9f9;
+        border-radius: 50px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        text-align: center;
+    }
+
+    
+    .artist-name {
+        font-size: 100px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+  
+    .artist-image {
+        width: 300px;
+        height: auto;
+        
+    }
+
+   
+    
+
+    .biography-container h5 {
+        font-size: 50px;
+        font-weight: 1000;
+        
+    }
+
+    .bio-text {
+        font-size: 16px;
+        color: #555;
+        line-height: 1.6;
+        margin-bottom: 10px;
+    }
+
+    .full-bio {
+        display: none;
+        font-size: 16px;
+        color: #555;
+        line-height: 1.6;
+        margin-top: 10px;
+    }
+
+    .read-more-btn {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .read-more-btn:hover {
+        background-color: #0056b3;
+    }
+
+   
+    .followers-count {
+        font-size: 20px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .follow-btn, .unfollow-btn {
+        background-color: #000000;
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 5px;
+        font-size: 16px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+    .follow-btn:hover, .unfollow-btn:hover {
+        background-color: #218838;
+    }
+
+    .unfollow-btn {
+        background-color: #dc3545;
+    }
+
+    .unfollow-btn:hover {
+        background-color: #c82333;
+    }
+
+    /* Latest Songs / Albums */
+    .latest-songs, .albums {
+        margin-top: 40px;
+        text-align: left;
+    }
+
+    .section-title {
+        font-size: 24px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 15px;
+    }
+
+    .song-item, .album-item {
+        font-size: 20px;
+        font-weight: 600;
+        color: #e5b60b;
+        margin: 5px 0;
+    }
+
+    .song-item a, .album-item a {
+        text-decoration: none;
+        color: inherit;
+        transition: color 0.3s;
+    }
+
+    .song-item a:hover, .album-item a:hover {
+        color: #0056b3;
+    }
+
+
+    /* Pagination */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+    }
+
+    .pagination-btn {
+        background-color: #007bff;
+        color: white;
+        padding: 8px 16px;
+        margin: 0 5px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+    .pagination-btn:hover {
+        background-color: #0056b3;
+    }
+
+    .current-page {
+        align-self: center;
+        font-size: 16px;
+        color: #333;
+    }
+
+    /* Return Home Button */
+    .btn-warning {
+        background-color: #ff9800;
+        color: white;
+        padding: 12px 24px;
+        font-size: 16px;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .btn-warning:hover {
+        background-color: #e68900;
+    }
+</style>
+
+
+{% endblock %}

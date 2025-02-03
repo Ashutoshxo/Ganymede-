@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<h1 class="text-center text-warning mb-4">Song List</h1>
+
+{% if user.is_staff %}
+    <a href="{% url 'add_song' %}" class="btn btn-primary mb-3" style="font-size: 20px; font-weight: bold;">Add New Song</a>
+{% endif %}
+
+
+<table class="table table-dark table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Title</th>
+            <th scope="col">Artist</th>
+            <th scope="col">Album</th>
+            <th scope="col">Genre</th>
+           
+            {% if user.is_staff %}
+                <th scope="col">Actions</th>
+            {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for song in songs %}
+        <tr>
+           
+            <td>
+                {% if song.image %}
+                <a href="{% url 'song_detail' song.id %}">
+                    <img src="{{ song.image.url }}" alt="{{ song.title }}" style="width: 50px; height: 50px; object-fit: cover;">
+                {% else %}
+                    <img src="{% static 'images/default-image.jpg' %}" alt="Default" style="width: 50px; height: 50px;">
+                {% endif %}
+            </td>
+            <td>{{ song.title }}</td> 
+            
+            <td>{{ song.artist.name }}</td>
+            <td>
+                {% if song.album %}
+                    {{ song.album.title }}
+                {% else %}
+                    N/A
+                {% endif %}
+            </td>
+            <td>{{ song.genre.name }}</td>
+            
+            {% if user.is_staff %}
+                <td>
+                    <a href="{% url 'edit_song' song.id %}" class="btn btn-warning btn-sm">Edit</a>
+                </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+<style>
+ body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.song-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.card-body {
+    background-color: #343a40;
+}
+
+h1 {
+    font-family: 'Arial', sans-serif;
+    font-weight: bolder; 
+    font-size: 48px;
+    
+}
+
+</style>
+
+{% endblock %}
