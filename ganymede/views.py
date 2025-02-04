@@ -429,12 +429,6 @@ def song_detail(request, id):
 
 
 
-
-
-
-
-
-
 def about_us(request):
     return render(request, 'aboutus.html')
 

@@ -9,7 +9,7 @@
     Ganymede
 </a>
 
-<!-- User Profile or Login Link -->
+
 <a href="{% if user.is_authenticated %}{% url 'user_profile' %}{% else %}{% url 'login' %}{% endif %}" 
    style="font-family: 'Roboto', sans-serif; font-size: 1.5em; height: auto; color: #A68C64;">
     {% if user.is_authenticated %}
@@ -26,8 +26,8 @@
     {% endif %}
 </a>
 
-<!-- Hero Section with Desert-Inspired Background and Text -->
-<div style="background-image: url('https://wallpapercave.com/wp/wp10446532.jpg'); background-color: rgba(0, 0, 0, 0.7); color: #FAF1D1; text-align: center; padding: 80px 40px; position: relative;">
+
+<div style="background-image: url('https://wallpapercave.com/wp/wp10446532.jpg');  color: #FAF1D1; text-align: center; padding: 80px 40px; position: relative;">
     <h1 style="font-size: 5em; font-family: 'Montserrat', sans-serif; text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8); letter-spacing: 5px; color: #A68C64; background-color: rgba(0, 0, 0, 0.5); padding: 10px;">
         Welcome to Ganymede
     </h1>

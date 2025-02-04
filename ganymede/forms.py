@@ -1,17 +1,15 @@
 # forms.py
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import CustomUser  # Import your custom user model
+from .models import CustomUser
 from .models import SubscriptionPlan
 
 class RegisterForm(UserCreationForm):
     class Meta:
-        model = CustomUser  # Use your custom user model here
-        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
+        model = CustomUser  
+        fields = ['username', 'email', 'password1', 'password2']
         labels = {
             'username': 'Enter Username',
-            'first_name': 'Enter First Name',
-            'last_name': 'Enter Last Name',
             'email': 'Enter Email',
             'password1': 'Enter Password',
             'password2': 'Confirm Password',
@@ -21,18 +19,6 @@ class RegisterForm(UserCreationForm):
         widget=forms.TextInput(attrs={
             "class": "form-control bg-dark text-warning border-warning",
             "placeholder": "Enter Username"
-        })
-    )
-    first_name = forms.CharField(
-        widget=forms.TextInput(attrs={
-            "class": "form-control bg-dark text-warning border-warning",
-            "placeholder": "Enter First Name"
-        })
-    )
-    last_name = forms.CharField(
-        widget=forms.TextInput(attrs={
-            "class": "form-control bg-dark text-warning border-warning",
-            "placeholder": "Enter Last Name"
         })
     )
     email = forms.EmailField(
@@ -73,7 +59,7 @@ class LoginForm(AuthenticationForm):
    
 
 
-#sub
+
 class SubscriptionForm(forms.ModelForm):
     class Meta:
         model = SubscriptionPlan
@@ -87,22 +73,21 @@ class SubscriptionForm(forms.ModelForm):
 
 
 
-from django import forms
-from .models import CustomUser
+# from .models import CustomUser
 
-class UserProfileForm(forms.ModelForm):
-    class Meta:
-        model = CustomUser
-        fields = ['bio', 'profile_picture']  
+# class UserProfileForm(forms.ModelForm):
+#     class Meta:
+#         model = CustomUser
+#         fields = ['bio', 'profile_picture']  
 
 
-# forms.py
-from django import forms
+
+
 from django.contrib.auth.forms import UserChangeForm
-from .models import CustomUser
+
 
 class UserProfileForm(UserChangeForm):
-    # Exclude the password field from the form
+    
     password = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     class Meta:
