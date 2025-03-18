@@ -7,7 +7,7 @@ from .models import Song , Genre, Album, Playlist
 from .models import UserSubscription
 from .models import FavoriteSong, FavoriteAlbum, ArtistFollow
 
-from .decorators import subscription_required
+
 
 from django.contrib.auth.models import User
 
@@ -39,6 +39,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render, get_object_or_404, redirect
 
 from django.contrib.auth.decorators import login_required, user_passes_test
+
 
 from rest_framework import status
 
@@ -107,7 +108,7 @@ def custom_logout(request):
 
 #home
 
-@subscription_required
+
 def home(request):
     artists = Artist.objects.all()[:5]
     genres = Genre.objects.all()[:2]
@@ -409,7 +410,7 @@ def base_view(request):
 
 
 
-@subscription_required
+
 def song_detail(request, id):
     song = get_object_or_404(Song, id=id)
     playlist = Song.objects.filter(
