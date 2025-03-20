@@ -1,0 +1,128 @@
+ 
+.hello{color:palegoldenrod;}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    box-sizing: border-box;
+}
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+
+.shadow {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.shadow:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+body {
+    background-color: #121212; /* Darker background */
+    color: #e0e0e0; /* Softer text color */
+    padding: 20px;
+    
+}
+
+.music-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px;
+    border-top: 2px solid #1abc9c; /* Top border */
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    border-right: 2px solid #1abc9c; /* Right border */
+    padding-right: 20px;
+}
+
+.control-btn {
+    background: none;
+    border: none;
+    color: #1abc9c;
+    font-size: 24px;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.track-info {
+    flex-grow: 1;
+    text-align: center;
+    border-left: 2px solid #1abc9c; /* Left border */
+    border-right: 2px solid #1abc9c; /* Right border */
+    padding: 0 20px;
+}
+
+.track-title {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.track-artist {
+    font-size: 14px;
+    color: #bdc3c7;
+}
+
+.progress-bar {
+    flex-grow: 1;
+    margin: 0 20px;
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    border-left: 2px solid #1abc9c; /* Left border */
+    padding-left: 20px;
+}
+
+.volume-slider {
+    margin-left: 5px;
+    width: 100px;
+}
+
+.social-media {
+    display: flex;
+    align-items: center;
+    border-left: 2px solid #1abc9c; /* Left border */
+    padding-left: 20px;
+}
+
+.social-icon {
+    color: white;
+    font-size: 20px;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.footer-bottom {
+    background-color: #34495e;
+    text-align: center;
+    padding: 10px;
+    color: #bdc3c7;
+    font-size: 14px;
+    border-top: 2px solid #1abc9c; /* Top border */
+}
+
+
